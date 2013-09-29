@@ -49,6 +49,11 @@ class PluginSkmapsimple_HookSkmapsimple extends Hook {
             $this->bShowMap = false;
         }
 
+        $oTopic = $data['topic'];
+
+
+        if ($data['bTopicList'] && $oTopic->getTextShort()!=$oTopic->getText() ) return;
+
         $this->Viewer_Assign('oTopic',$data['topic']);
         $this->Viewer_Assign('bShowMap',$this->bShowMap);
         return $this->Viewer_Fetch(Plugin::GetTemplatePath(__CLASS__) . 'hook_insert_map.tpl');
@@ -57,7 +62,7 @@ class PluginSkmapsimple_HookSkmapsimple extends Hook {
     public function TopicAddExtraField(&$data){
         $sCoord = trim(getRequest('topic_skmapcord'),'()');
 
-        if ($sCoord!= '' and !preg_match("/^([0-9]*\.[0-9]*),[ ]?([0-9]*\.[0-9]*)$/", $sCoord) ){
+        if ($sCoord!= '' and !preg_match("/^[-]?([0-9]*\.[0-9]*),[ ]?[-]?([0-9]*\.[0-9]*)$/", $sCoord) ){
             return;
         }
 

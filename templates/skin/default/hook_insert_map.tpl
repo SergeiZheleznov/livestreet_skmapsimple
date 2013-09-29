@@ -12,6 +12,7 @@
 				    disableDefaultUI: true,
 				    mapTypeControl: true,
 				    scaleControl: true,
+				    scrollwheel: false,
 				    zoomControl: true
 				};
 
