@@ -42,6 +42,7 @@
 
 		</script>
 
+		<a name="map"></a>
 		<div>
 		    <div id="skmapsimple-map-canvas-{$oTopic->getId()}" style="height:300px"></div>
 		</div>
