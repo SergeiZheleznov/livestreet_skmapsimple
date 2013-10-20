@@ -28,10 +28,10 @@ class PluginSkmapsimple_HookSkmapsimple extends Hook {
         $this->AddHook('template_form_add_topic_link_end','FormMapEdit');
         $this->AddHook('topic_edit_before','TopicAddExtraField');
         $this->AddHook('topic_add_before','TopicAddExtraField');
-        
 
-        if ($this->bShowMap) $this->AddHook('template_html_head_end','InsertApi');   
-        $this->AddHook('template_topic_content_end','InsertMap');         
+
+        if ($this->bShowMap) $this->AddHook('template_html_head_end','InsertApi');
+        $this->AddHook('template_topic_content_end','InsertMap');
     }
 
     public function FormMapEdit(){
@@ -61,6 +61,7 @@ class PluginSkmapsimple_HookSkmapsimple extends Hook {
 
     public function TopicAddExtraField(&$data){
         $sCoord = trim(getRequest('topic_skmapcord'),'()');
+        $sInfo = trim(getRequest('topic_skmapinfo'));
 
         if ($sCoord!= '' and !preg_match("/^[-]?([0-9]*\.[0-9]*),[ ]?[-]?([0-9]*\.[0-9]*)$/", $sCoord) ){
             return;
@@ -68,6 +69,7 @@ class PluginSkmapsimple_HookSkmapsimple extends Hook {
 
         $oTopic = $data['oTopic'];
         $oTopic->setSkmapcoord($sCoord);
+        $oTopic->setSkmapinfo(!empty($sCoord) ? $sInfo : '');
     }
 }
 ?>

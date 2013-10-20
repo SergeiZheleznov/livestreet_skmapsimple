@@ -9,11 +9,11 @@
 					zoom: 8,
 					center: new google.maps.LatLng({$oTopic->getSkmapcoord()}),
 					mapTypeId: google.maps.MapTypeId.ROADMAP,
-				    disableDefaultUI: true,
-				    mapTypeControl: true,
-				    scaleControl: true,
+					disableDefaultUI: true,
+					mapTypeControl: true,
+					scaleControl: true,
 				    scrollwheel: false,
-				    zoomControl: true
+					zoomControl: true
 				};
 
 				map{$oTopic->getId()} = new google.maps.Map(document.getElementById('skmapsimple-map-canvas-{$oTopic->getId()}'),mapOptions{$oTopic->getId()});
@@ -22,8 +22,22 @@
 					position: new google.maps.LatLng({$oTopic->getSkmapcoord()}),
 					map: map{$oTopic->getId()},
 					icon: '{$aTemplateWebPathPlugin.skmapsimple}/images/marker.png?v=5',
-					shadow: '{$aTemplateWebPathPlugin.skmapsimple}/images/marker.shadow.png?v=5'
+					shadow: '{$aTemplateWebPathPlugin.skmapsimple}/images/marker.shadow.png?v=5',
+					{if $oTopic->getInfotitle()}
+					title: '{$oTopic->getInfotitle()}'
+					{/if}
 				});
+
+				{if $oTopic->getInfomessage()}
+				infoWindow{$oTopic->getId()} = new google.maps.InfoWindow({
+					content: '{$oTopic->getInfomessage()}',
+					maxWidth: 300
+				});
+
+				google.maps.event.addListener(marker{$oTopic->getId()}, 'click', function () {
+					infoWindow{$oTopic->getId()}.open(map{$oTopic->getId()}, marker{$oTopic->getId()});
+				});
+				{/if}
 			});
 
 		</script>

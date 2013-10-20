@@ -16,6 +16,17 @@ class PluginSkmapsimple_ModuleTopic_EntityTopic extends PluginSkmapsimple_Inheri
 	public function setSkmapcoord($data) {
 		$this->setExtraValue('sk_map',$data);
 	}
-
+	public function getSkmapinfo() {
+		return $this->getExtraValue('sk_map_info');
+	}
+	public function setSkmapinfo($data) {
+		$this->setExtraValue('sk_map_info',$data);
+	}
+	public function getInfomessage() {
+		return "<b>" . htmlspecialchars($this->getTitle(), ENT_QUOTES) . "</b><br/>" . htmlspecialchars($this->getSkmapinfo(), ENT_QUOTES);
+	}
+	public function getInfotitle() {
+		return addslashes($this->getTitle());
+	}
 }
 ?>

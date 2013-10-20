@@ -17,10 +17,10 @@
 					icon: '{$aTemplateWebPathPlugin.skmapsimple}/images/marker.png?v=8',
 					shadow: '{$aTemplateWebPathPlugin.skmapsimple}/images/marker.shadow.png?v=8'
 				});
-			   	google.maps.event.addListener(marker, "dragend", function(event) { 
+			   	google.maps.event.addListener(marker, "dragend", function(event) {
 					placeMarker(event.latLng);
 					$('#topic_skmapcord').val(event.latLng);
-	        	}); 
+	        	});
 			}
 		}
 
@@ -29,10 +29,10 @@
 				zoom: 8,
 				center: c,
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
-			    disableDefaultUI: true,
-			    mapTypeControl: true,
-			    scaleControl: true,
-			    zoomControl: true
+				disableDefaultUI: true,
+				mapTypeControl: true,
+				scaleControl: true,
+				zoomControl: true
 			};
 			map = new google.maps.Map(document.getElementById('skmapsimple-map-canvas'),mapOptions);
 
@@ -46,7 +46,7 @@
 			});
 
 			{if $_aRequest['topic_skmapcord']}
-	   			google.maps.event.addListener(marker, "dragend", function(event) { 
+	   			google.maps.event.addListener(marker, "dragend", function(event) {
 					placeMarker(event.latLng);
 					$('#topic_skmapcord').val(event.latLng);
 	        	});
@@ -59,10 +59,12 @@
 	            $('#skmapsimple-map-wrapper').slideDown(300, function(){
 	                google.maps.event.trigger(map, "resize");
 	                map.setCenter(c);
-	            });				
+	            });
+				$('#topic_skmapinfo').show();
 			} else {
 				$('#skmapsimple-map-wrapper').slideUp();
 				$('#topic_skmapcord').val('');
+				$('#topic_skmapinfo').hide();
 			}
         });
 
@@ -77,4 +79,8 @@
 	<div id="skmapsimple-map-wrapper"{if !$_aRequest['topic_skmapcord']} style="display:none;"{/if}>
 	   	<div id="skmapsimple-map-canvas" style="height:300px; margin:7px 0 0 0"></div>
 	</div>
+
+	<p id="topic_skmapinfo" {if !$_aRequest['topic_skmapcord']} style="display:none;"{/if}><label for="topic_skmapinfo">{$aLang.plugin.skmapsimple.infomessage_title}</label>
+	<input type="text" class="input-text input-width-full" id="page_seo_keywords" name="topic_skmapinfo" value="{$_aRequest['topic_skmapinfo']}" class="input-wide" />
+	<span class="note">{$aLang.plugin.skmapsimple.infomessage_note}</span></p>
 </p>

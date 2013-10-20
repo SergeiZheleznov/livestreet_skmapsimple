@@ -20,6 +20,7 @@ class PluginSkmapsimple_ActionTopic extends PluginSkmapsimple_Inherit_ActionTopi
 		}
 
     	$_REQUEST['topic_skmapcord']=$oTopic->getSkmapcoord();
+    	$_REQUEST['topic_skmapinfo']=$oTopic->getSkmapinfo();
     }
 }
 ?>
