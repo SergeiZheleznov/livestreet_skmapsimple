@@ -28,13 +28,35 @@
 			var mapOptions = {
 				zoom: 8,
 				center: c,
-				mapTypeId: google.maps.MapTypeId.ROADMAP,
 				disableDefaultUI: true,
 				mapTypeControl: true,
 				scaleControl: true,
 				zoomControl: true
 			};
 			map = new google.maps.Map(document.getElementById('skmapsimple-map-canvas'),mapOptions);
+
+			var openStreet = new google.maps.ImageMapType({
+				getTileUrl: function(ll, z) {
+					return "http://tile.openstreetmap.org/" + z + "/" + ll.x + "/" + ll.y + ".png";
+				},
+				tileSize: new google.maps.Size(256, 256),
+				maxZoom: 19,
+				name: "Карта OSM"
+			});
+
+			map.mapTypes.set('osm', openStreet);
+			map.setMapTypeId('osm');
+			map.setOptions({
+				mapTypeControlOptions: {
+					mapTypeIds: [
+						'osm',
+						google.maps.MapTypeId.ROADMAP,
+						google.maps.MapTypeId.SATELLITE,
+						google.maps.MapTypeId.HYBRID
+					],
+					style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+				}
+			});
 
 			{if $_aRequest['topic_skmapcord']}
 				placeMarker(c);

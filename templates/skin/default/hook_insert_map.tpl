@@ -8,7 +8,6 @@
 				var mapOptions{$oTopic->getId()} = {
 					zoom: 8,
 					center: new google.maps.LatLng({$oTopic->getSkmapcoord()}),
-					mapTypeId: google.maps.MapTypeId.ROADMAP,
 					disableDefaultUI: true,
 					mapTypeControl: true,
 					scaleControl: true,
@@ -17,6 +16,29 @@
 				};
 
 				map{$oTopic->getId()} = new google.maps.Map(document.getElementById('skmapsimple-map-canvas-{$oTopic->getId()}'),mapOptions{$oTopic->getId()});
+
+				var openStreet = new google.maps.ImageMapType({
+					getTileUrl: function(ll, z) {
+						return "http://tile.openstreetmap.org/" + z + "/" + ll.x + "/" + ll.y + ".png";
+					},
+					tileSize: new google.maps.Size(256, 256),
+					maxZoom: 19,
+					name: "Карта OSM"
+				});
+
+				map{$oTopic->getId()}.mapTypes.set('osm', openStreet);
+				map{$oTopic->getId()}.setMapTypeId('osm');
+				map{$oTopic->getId()}.setOptions({
+					mapTypeControlOptions: {
+						mapTypeIds: [
+							'osm',
+							google.maps.MapTypeId.ROADMAP,
+							google.maps.MapTypeId.SATELLITE,
+							google.maps.MapTypeId.HYBRID
+						],
+						style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+					}
+				});
 
 				marker{$oTopic->getId()} = new google.maps.Marker({
 					position: new google.maps.LatLng({$oTopic->getSkmapcoord()}),
