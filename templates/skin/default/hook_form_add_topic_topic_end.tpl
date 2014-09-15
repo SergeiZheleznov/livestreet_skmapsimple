@@ -28,10 +28,11 @@
 			var mapOptions = {
 				zoom: {$oConfig->GetValue('plugin.skmapsimple.default_zoom')},
 				center: c,
-				disableDefaultUI: true,
+				disableDefaultUI: {if $oConfig->GetValue('plugin.skmapsimple.disable_default_ui')}true{else}false{/if},
 				mapTypeControl: true,
-				scaleControl: true,
-				zoomControl: true
+				scaleControl: {if $oConfig->GetValue('plugin.skmapsimple.scale_control')}true{else}false{/if},
+				scrollwheel: {if $oConfig->GetValue('plugin.skmapsimple.scroll_wheel')}true{else}false{/if},
+				zoomControl: {if $oConfig->GetValue('plugin.skmapsimple.zoom_control')}true{else}false{/if}
 			};
 			map = new google.maps.Map(document.getElementById('skmapsimple-map-canvas'),mapOptions);
 

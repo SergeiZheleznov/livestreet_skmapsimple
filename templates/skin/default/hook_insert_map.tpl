@@ -8,11 +8,11 @@
 				var mapOptions{$oTopic->getId()} = {
 					zoom: {$oConfig->GetValue('plugin.skmapsimple.default_zoom')},
 					center: new google.maps.LatLng({$oTopic->getSkmapcoord()}),
-					disableDefaultUI: true,
+					disableDefaultUI: {if $oConfig->GetValue('plugin.skmapsimple.disable_default_ui')}true{else}false{/if},
 					mapTypeControl: true,
-					scaleControl: true,
-					scrollwheel: false,
-					zoomControl: true
+					scaleControl: {if $oConfig->GetValue('plugin.skmapsimple.scale_control')}true{else}false{/if},
+					scrollwheel: {if $oConfig->GetValue('plugin.skmapsimple.scroll_wheel')}true{else}false{/if},
+					zoomControl: {if $oConfig->GetValue('plugin.skmapsimple.zoom_control')}true{else}false{/if}
 				};
 
 				map{$oTopic->getId()} = new google.maps.Map(document.getElementById('skmapsimple-map-canvas-{$oTopic->getId()}'),mapOptions{$oTopic->getId()});
