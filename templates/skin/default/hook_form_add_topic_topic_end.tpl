@@ -26,7 +26,7 @@
 
 		function initialize() {
 			var mapOptions = {
-				zoom: 8,
+				zoom: {$oConfig->GetValue('plugin.skmapsimple.default_zoom')},
 				center: c,
 				disableDefaultUI: true,
 				mapTypeControl: true,

@@ -23,4 +23,8 @@ $config['show_guests'] = true;
 // 4. Скопировать цифры из строки поиска
 
 $config['default_coord'] = '54.559322587438636, 21.1761474609375';
+
+// Значение приближения по умолчанию
+$config['default_zoom'] = 8;
+
 return $config;

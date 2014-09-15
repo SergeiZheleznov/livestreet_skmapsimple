@@ -6,7 +6,7 @@
 
 			google.maps.event.addDomListener(window, 'load', function(){
 				var mapOptions{$oTopic->getId()} = {
-					zoom: 8,
+					zoom: {$oConfig->GetValue('plugin.skmapsimple.default_zoom')},
 					center: new google.maps.LatLng({$oTopic->getSkmapcoord()}),
 					disableDefaultUI: true,
 					mapTypeControl: true,
