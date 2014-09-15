@@ -24,6 +24,7 @@ class PluginSkmapsimple extends Plugin {
     }
 
     public function Init() {
+        $this->Viewer_AppendStyle(Plugin::GetTemplateWebPath(__CLASS__) . 'css/map.css');
     }
 }
 ?>
