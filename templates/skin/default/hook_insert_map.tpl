@@ -11,7 +11,7 @@
 					disableDefaultUI: true,
 					mapTypeControl: true,
 					scaleControl: true,
-				    scrollwheel: false,
+					scrollwheel: false,
 					zoomControl: true
 				};
 
@@ -65,8 +65,8 @@
 		</script>
 
 		<a name="map"></a>
-		<div>
-		    <div id="skmapsimple-map-canvas-{$oTopic->getId()}" style="height:300px"></div>
+		<div class="skmapsimple-top">
+			<div id="skmapsimple-map-canvas-{$oTopic->getId()}" style="height:300px"></div>
 		</div>
 	{/if}
 
